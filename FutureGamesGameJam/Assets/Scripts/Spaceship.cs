@@ -22,7 +22,7 @@ public class Spaceship : MonoBehaviour
     [Header("Max Velocity")]
     public float MaxVelocity = 20;
 
-    public float MaxChargeTime = 1;
+    //public float MaxChargeTime = 1;
 
     private Rigidbody _rigidbody;
     //private bool _isFiring;
@@ -80,9 +80,7 @@ public class Spaceship : MonoBehaviour
             {
                 _fireButtonDownTimer += Time.deltaTime;
 
-                Debug.LogFormat("Timer: {0} | Max: {1}", _fireButtonDownTimer, MaxChargeTime);
-
-                if (_fireButtonDownTimer >= MaxChargeTime)
+                if (_fireButtonDownTimer >= GameManager.Instance.MaxLaserChargeTime)
                 {
                     InstantiateLaser();
                 }

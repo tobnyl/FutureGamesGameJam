@@ -9,6 +9,9 @@ public class Laser : MonoBehaviour
     public float DamagePoints = 1;
 
     private Rigidbody _rigidbody;
+    private float _force;
+    private Vector3 _startPosition;
+
 
 	#endregion
 	#region Events
@@ -21,11 +24,16 @@ public class Laser : MonoBehaviour
 	void Start() 
 	{
         _rigidbody.AddRelativeForce(Vector3.forward * Force, ForceMode.Impulse);
+
+        _startPosition = transform.position;
 	}
 
 	void Update() 
 	{
-		
+		if (Vector3.Distance(transform.position, _startPosition) > GameManager.Instance.LaserMaxDistance)
+        {
+            Destroy(gameObject);
+        }
 	}
 
     void OnCollisionEnter(Collision c)
@@ -41,7 +49,7 @@ public class Laser : MonoBehaviour
 	
 	public void Initialize(float timeElapsed)
     {
-
+        Force -= Mathf.Lerp(0, 100, timeElapsed / GameManager.Instance.MaxLaserChargeTime);
     }
 	
 	#endregion
