@@ -8,6 +8,7 @@ public class Spaceship : MonoBehaviour
     [Header("Objects")]
     public Transform FireSpawnPoint;
     public GameObject LaserPrefab;
+    public GameObject Mesh;
 
     [Header("Force")]
     public float BoostMultiplier = 1;
@@ -148,12 +149,14 @@ public class Spaceship : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter(Collision c)
+    private void OnTriggerEnter(Collider c)
     {
         if (c.gameObject.layer == LayerMask.NameToLayer("Moon"))
         {
             Debug.Log("Yes");
             _playerHealth.TakeDamage(1);
+            Destroy(Mesh);
+            _rigidbody.isKinematic = true;
         }
     }
 
