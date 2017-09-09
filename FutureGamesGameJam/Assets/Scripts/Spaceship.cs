@@ -23,12 +23,14 @@ public class Spaceship : MonoBehaviour
 
     [Header("Max Velocity")]
     public float MaxVelocity = 20;
+    public float MaxAngularVelocity = 10f;
 
     //public float MaxChargeTime = 1;
 
     private Rigidbody _rigidbody;
     //private bool _isFiring;
     private float _sqrMaxVelocity;
+    private float _sqrMaxAngularVelocity;
     private float _force;
     private float _fireButtonDownTimer;
     private bool _isFired;
@@ -72,8 +74,10 @@ public class Spaceship : MonoBehaviour
 	{
         _rigidbody = GetComponent<Rigidbody>();
 
-        _sqrMaxVelocity = MaxVelocity * MaxVelocity;        
-	}
+        _sqrMaxVelocity = MaxVelocity * MaxVelocity;
+        _sqrMaxAngularVelocity = MaxAngularVelocity * MaxAngularVelocity;
+
+    }
 	
 	void Start() 
 	{
@@ -82,6 +86,8 @@ public class Spaceship : MonoBehaviour
 
 	void Update() 
 	{
+        Debug.LogFormat("Avel: {0}", _rigidbody.angularVelocity.magnitude);
+
         if (!_isFired)
         {
             if (FireButton)
@@ -92,20 +98,20 @@ public class Spaceship : MonoBehaviour
                 {
                     StartCoroutine(RecoilCoroutine());
 
-                    Debug.Log("Time's up");
+                    //Debug.Log("Time's up");
                     InstantiateLaser();
                 }
             }
             else if (FireButtonUp)
             {
-                Debug.Log("Fire button up");
+                //Debug.Log("Fire button up");
                 InstantiateLaser();
                 _isFired = false;
             }
         }
         else if (_isFired && FireButtonUp)
         {
-            Debug.Log("Is Fired false");
+            //Debug.Log("Is Fired false");
             _isFired = false;
         }
     }
@@ -117,6 +123,11 @@ public class Spaceship : MonoBehaviour
             if (_rigidbody.velocity.sqrMagnitude > _sqrMaxVelocity)
             {
                 _rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
+            }
+
+            if (_rigidbody.angularVelocity.sqrMagnitude > _sqrMaxAngularVelocity)
+            {
+                _rigidbody.angularVelocity = _rigidbody.angularVelocity.normalized * MaxAngularVelocity;
             }
 
             _force = IdleForce;
