@@ -65,9 +65,9 @@ public class AsteroidLogic : MonoBehaviour
 	{
 		asteroidModel = transform.GetChild(0);
 		asteroidModel.GetComponent<AsteroidModelScript>().SetUpMesh();
-		modelRotDir = transform.rotation.eulerAngles * Random.Range(-0.2f, 0.2f);
+		modelRotDir = transform.rotation.eulerAngles * 3;
 		asteroidTarget = moon;
-		moveSpeed = movementSpeed * (-0.15f + Random.Range(0, 0.3f));
+		moveSpeed = movementSpeed;// * (-0.15f + Random.Range(0, 0.3f));
 
 		direction = -(transform.position - asteroidTarget.position).normalized;
 		transform.rotation = Quaternion.Euler(0, 0, 0);
@@ -88,22 +88,32 @@ public class AsteroidLogic : MonoBehaviour
 	void SetUpSize()
 	{
 
-		float _size = Random.Range(asteroidMinSize, asteroidMaxSize);
+		//float _size = Random.Range(asteroidMinSize, asteroidMaxSize);
+
+		float size_ = Random.Range(0, 1f);
 
 		//size
-		asteroidModel.localScale = asteroidModel.localScale * _size;
+
+		float sizeDifference = (asteroidMaxSize - asteroidMinSize) * size_;
+		float _vecSize = asteroidMinSize + sizeDifference;
+
+		print(_vecSize);
+
+		asteroidModel.localScale = new Vector3(_vecSize, _vecSize, _vecSize);
 
 		//hp
 
-		health = baseHp * _size;
+		health = baseHp * (size_ + 1);
 
-		mass = baseMass * _size;
+		mass = baseMass * (size_ * 3);
+
+		moveSpeed = movementSpeed - (size_ * 0.3f);
 
 	}
 
 	void RotateModel()
 	{
-		transform.GetChild(0).transform.Rotate(modelRotDir * rotationSpeed);
+		asteroidModel.transform.Rotate(modelRotDir * rotationSpeed);
 	}
 
 	public void Collided(string typeHit)
@@ -113,8 +123,8 @@ public class AsteroidLogic : MonoBehaviour
 		if (typeHit == "Moon")
 		{
 			//Play particle effect
-			//Destroy moon
-			Instantiate(ParticleObject, asteroidModel.transform.position, Quaternion.identity);
+			GameObject g = Instantiate(ParticleObject, asteroidModel.transform.position, Quaternion.identity) as GameObject;
+			g.GetComponent<ParticleEffectObjScript>().SetScale(transform.localScale);
 			asteroidModel.GetComponent<Collider>().enabled = false;
 			asteroidModel.GetComponent<Renderer>().enabled = false;
 
@@ -129,7 +139,7 @@ public class AsteroidLogic : MonoBehaviour
 
 	IEnumerator DestroySelf()
 	{
-		yield return new WaitForSeconds(0.25f);
+		yield return new WaitForSeconds(1f);
 		movementSpeed = 0;
 		yield return new WaitForSeconds(deathTime - 0.25f);
 		Destroy(gameObject);
