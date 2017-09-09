@@ -19,14 +19,17 @@ public class Spaceship : MonoBehaviour
     public float YawTorque = 1;
     public float RollTorque = 1;
 
-    [Header("Max")]
+    [Header("Max Velocity")]
     public float MaxVelocity = 20;
 
+    public float MaxChargeTime = 1;
+
     private Rigidbody _rigidbody;
-    private bool _isFiring;
+    //private bool _isFiring;
     private float _sqrMaxVelocity;
     private float _force;
     private float _fireButtonDownTimer;
+    private bool _isFired;
 
 
     private Vector2 AxisLeft
@@ -71,22 +74,29 @@ public class Spaceship : MonoBehaviour
 
 	void Update() 
 	{
-        if (FireButtonDown)
+        if (!_isFired)
         {
-            Instantiate(LaserPrefab, FireSpawnPoint.position, FireSpawnPoint.rotation);
-        }
+            if (FireButton)
+            {
+                _fireButtonDownTimer += Time.deltaTime;
 
-        if (FireButton)
-        {
-            _fireButtonDownTimer += Time.deltaTime;
-        }
-        else if (FireButtonUp)
-        {
-            Debug.LogFormat("Timer: {0}", _fireButtonDownTimer);
+                Debug.LogFormat("Timer: {0} | Max: {1}", _fireButtonDownTimer, MaxChargeTime);
 
-            _fireButtonDownTimer = 0;
+                if (_fireButtonDownTimer >= MaxChargeTime)
+                {
+                    InstantiateLaser();
+                }
+            }
+            else if (FireButtonUp)
+            {
+                InstantiateLaser();
+            }
         }
-	}
+        else if (_isFired && FireButtonUp)
+        {
+            _isFired = false;
+        }
+    }
 
     void FixedUpdate()
     {
@@ -112,7 +122,16 @@ public class Spaceship : MonoBehaviour
     #endregion
     #region Methods
 
+    private void InstantiateLaser()
+    {
+        var go = Instantiate(LaserPrefab, FireSpawnPoint.position, FireSpawnPoint.rotation);
+        var laser = go.GetComponent<Laser>();
+        laser.Initialize(_fireButtonDownTimer);
 
+
+        _isFired = true;
+        _fireButtonDownTimer = 0;
+    }
 
     #endregion
 }

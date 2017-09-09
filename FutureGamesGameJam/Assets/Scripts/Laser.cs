@@ -39,7 +39,10 @@ public class Laser : MonoBehaviour
 	#endregion
 	#region Methods
 	
-	
+	public void Initialize(float timeElapsed)
+    {
+
+    }
 	
 	#endregion
 }
