@@ -42,8 +42,7 @@ public class AsteroidLogic : MonoBehaviour
 	void Start()
 	{
         _fracturedObject = GetComponent<FracturedObject>();
-        _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();
-        var derp = "derp";
+        _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();        
 	}
 
     public void TakeDamage(float amount)
