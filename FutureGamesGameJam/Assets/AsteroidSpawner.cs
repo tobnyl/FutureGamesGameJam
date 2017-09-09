@@ -8,6 +8,8 @@ public class AsteroidSpawner : MonoBehaviour
 	[SerializeField] Transform moon;
 	[SerializeField] GameObject plainAsteroid;
 
+    public GameObject[] AsteroidPrefabs;
+
 	float elapsedTime;
 	float timeUntilSpawn;
 	float baseSpawnTime = 10;
@@ -87,7 +89,10 @@ public class AsteroidSpawner : MonoBehaviour
 
 		for (int i = 0; i < spawnAmount; i++)
 		{
-			GameObject g = (GameObject)Instantiate(plainAsteroid);
+            var currentAsteroid = AsteroidPrefabs[Random.Range(0, AsteroidPrefabs.Length - 1)];
+            var g = Instantiate(currentAsteroid);
+
+            //GameObject g = (GameObject)Instantiate(plainAsteroid);
 			g.transform.position = new Vector3(0, 0, spawnDistance);
 
 			g.transform.RotateAround(moon.position, Vector3.up, Random.Range(0, 360));

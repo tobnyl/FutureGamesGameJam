@@ -140,7 +140,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BaseForce: 40
   Force: 100
-  DamagePoints: 10
+  DamagePoints: 1000
   DamageMaxMultiplier: 10
   MaxScale: 10
 --- !u!136 &136526143081813374

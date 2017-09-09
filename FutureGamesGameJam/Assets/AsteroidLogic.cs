@@ -6,31 +6,39 @@ using UnityEngine;
 public class AsteroidLogic : MonoBehaviour
 {
 
-	[SerializeField] Transform asteroidTarget;
+    [SerializeField]
+    Transform asteroidTarget;
 
-	//This value is just visual to help setting up the object in the inspector
-	[SerializeField] float movementSpeed;
-	[SerializeField] float movementSpeedDifRange;
-	[SerializeField] float baseMass;
+    //This value is just visual to help setting up the object in the inspector
+    [SerializeField]
+    float movementSpeed;
+    [SerializeField]
+    float movementSpeedDifRange;
+    [SerializeField]
+    float baseMass;
 
-	[SerializeField] float baseHp;
-	float deathTime;
+    [SerializeField]
+    float baseHp;
+    float deathTime;
 
-	float mass;
-	float health;
+    float mass;
+    float health;
 
-	[SerializeField] GameObject ParticleObject;
+    [SerializeField]
+    GameObject ParticleObject;
 
-	[Header("ModelStuff")]
-	[SerializeField]
-	float rotationSpeed;
-	[SerializeField] float asteroidMinSize;
-	[SerializeField] float asteroidMaxSize;
+    [Header("ModelStuff")]
+    [SerializeField]
+    float rotationSpeed;
+    [SerializeField]
+    float asteroidMinSize;
+    [SerializeField]
+    float asteroidMaxSize;
 
-	Transform asteroidModel;
+    Transform asteroidModel;
 
-	Vector3 direction;
-	Vector3 modelRotDir;
+    Vector3 direction;
+    Vector3 modelRotDir;
 
     private FracturedObject _fracturedObject;
     private List<FracturedChunk> _chunkList;
@@ -38,12 +46,12 @@ public class AsteroidLogic : MonoBehaviour
     //This is the valeu thats used by the code to move the asteroid
     float moveSpeed;
 
-	// Use this for initialization
-	void Start()
-	{
-        _fracturedObject = GetComponent<FracturedObject>();
-        _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();        
-	}
+    // Use this for initialization
+    void Start()
+    {
+        _fracturedObject = GetComponentInChildren<FracturedObject>();
+        _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();
+    }
 
     public void TakeDamage(float amount)
     {
@@ -61,87 +69,84 @@ public class AsteroidLogic : MonoBehaviour
         }
     }
 
-	public void SetUpAsteroid(Transform moon)
-	{
-		asteroidModel = transform.GetChild(0);
-		asteroidModel.GetComponent<AsteroidModelScript>().SetUpMesh();
-		modelRotDir = transform.rotation.eulerAngles * 3;
-		asteroidTarget = moon;
-		moveSpeed = movementSpeed;// * (-0.15f + Random.Range(0, 0.3f));
+    public void SetUpAsteroid(Transform moon)
+    {
+        asteroidModel = transform.GetChild(0);
+        //asteroidModel.GetComponent<AsteroidModelScript>().SetUpMesh();
+        modelRotDir = transform.rotation.eulerAngles * 3;
+        asteroidTarget = moon;
+        moveSpeed = movementSpeed;// * (-0.15f + Random.Range(0, 0.3f));
 
-		direction = -(transform.position - asteroidTarget.position).normalized;
-		transform.rotation = Quaternion.Euler(0, 0, 0);
+        direction = -(transform.position - asteroidTarget.position).normalized;
+        transform.rotation = Quaternion.Euler(0, 0, 0);
 
-		deathTime = asteroidModel.GetComponent<TrailRenderer>().time;
+        deathTime = asteroidModel.GetComponent<TrailRenderer>().time;
+        asteroidModel.GetComponent<AsteroidModelScript>().SetUpMesh(modelRotDir, rotationSpeed);
+        SetUpSize();
 
-		SetUpSize();
+    }
 
-	}
+    // Update is called once per frame
+    void Update()
+    {
+        transform.Translate(direction * movementSpeed);
 
-	// Update is called once per frame
-	void Update()
-	{
-		transform.Translate(direction * movementSpeed);
-		RotateModel();
-	}
+    }
 
-	void SetUpSize()
-	{
+    void SetUpSize()
+    {
 
-		//float _size = Random.Range(asteroidMinSize, asteroidMaxSize);
+        //float _size = Random.Range(asteroidMinSize, asteroidMaxSize);
 
-		float size_ = Random.Range(0, 1f);
+        float size_ = Random.Range(0, 1f);
 
-		//size
+        //size
 
-		float sizeDifference = (asteroidMaxSize - asteroidMinSize) * size_;
-		float _vecSize = asteroidMinSize + sizeDifference;
+        float sizeDifference = (asteroidMaxSize - asteroidMinSize) * size_;
+        float _vecSize = asteroidMinSize + sizeDifference;
 
-		print(_vecSize);
+        print(_vecSize);
 
-		asteroidModel.localScale = new Vector3(_vecSize, _vecSize, _vecSize);
+        asteroidModel.localScale = new Vector3(_vecSize, _vecSize, _vecSize);
 
-		//hp
+        //hp
 
-		health = baseHp * (size_ + 1);
+        health = baseHp * (size_ + 1);
 
-		mass = baseMass * (size_ * 3);
+        mass = baseMass * (size_ * 3);
 
-		moveSpeed = movementSpeed - (size_ * 0.3f);
+        moveSpeed = movementSpeed - (size_ * 0.3f);
 
-	}
+    }
 
-	void RotateModel()
-	{
-		asteroidModel.transform.Rotate(modelRotDir * rotationSpeed);
-	}
 
-	public void Collided(string typeHit)
-	{
-		//collision code here
 
-		if (typeHit == "Moon")
-		{
-			//Play particle effect
-			GameObject g = Instantiate(ParticleObject, asteroidModel.transform.position, Quaternion.identity) as GameObject;
-			g.GetComponent<ParticleEffectObjScript>().SetScale(transform.localScale);
-			asteroidModel.GetComponent<Collider>().enabled = false;
-			asteroidModel.GetComponent<Renderer>().enabled = false;
+    public void Collided(string typeHit)
+    {
+        //collision code here
 
-			StartCoroutine("DestroySelf");
-		}
+        if (typeHit == "Moon")
+        {
+            //Play particle effect
+            GameObject g = Instantiate(ParticleObject, asteroidModel.transform.position, Quaternion.identity) as GameObject;
+            g.GetComponent<ParticleEffectObjScript>().SetScale(transform.localScale);
+            asteroidModel.GetComponent<Collider>().enabled = false;
+            asteroidModel.GetComponent<Renderer>().enabled = false;
 
-		else if (typeHit == "Player")
-		{
+            StartCoroutine("DestroySelf");
+        }
 
-		}
-	}
+        else if (typeHit == "Player")
+        {
 
-	IEnumerator DestroySelf()
-	{
-		yield return new WaitForSeconds(1f);
-		movementSpeed = 0;
-		yield return new WaitForSeconds(deathTime - 0.25f);
-		Destroy(gameObject);
-	}
+        }
+    }
+
+    IEnumerator DestroySelf()
+    {
+        yield return new WaitForSeconds(1f);
+        movementSpeed = 0;
+        yield return new WaitForSeconds(deathTime - 0.25f);
+        Destroy(gameObject);
+    }
 }
