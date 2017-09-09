@@ -56,12 +56,12 @@ public class Spaceship : MonoBehaviour
         //    _rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
         //}
 
-        _rigidbody.AddForce(transform.forward * IdleForce);
+        _rigidbody.AddRelativeForce(Vector3.forward * IdleForce);
 
 
-        _rigidbody.AddTorque(transform.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
-        _rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
-        _rigidbody.AddTorque(transform.forward * (-AxisLeft.x) * RollTorque);
+        _rigidbody.AddRelativeTorque(Vector3.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
+        _rigidbody.AddRelativeTorque(Vector3.up * AxisLeft.x * YawTorque);
+        //_rigidbody.AddRelativeTorque(transform.forward * (-AxisLeft.x) * RollTorque);
 
         //if (_isFiringRight)
         //{
