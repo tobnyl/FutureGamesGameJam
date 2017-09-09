@@ -141,6 +141,7 @@ MonoBehaviour:
   BaseForce: 40
   Force: 100
   DamagePoints: 10
+  MaxScale: 10
 --- !u!136 &136526143081813374
 CapsuleCollider:
   m_ObjectHideFlags: 1

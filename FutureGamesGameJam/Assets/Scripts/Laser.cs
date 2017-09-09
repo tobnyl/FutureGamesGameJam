@@ -8,9 +8,9 @@ public class Laser : MonoBehaviour
     public float BaseForce = 1;
     public float Force = 1;
     public float DamagePoints = 1;
+    public float MaxScale = 1;
 
     private Rigidbody _rigidbody;
-    private float _force;
     private Vector3 _startPosition;
 
 
@@ -51,7 +51,13 @@ public class Laser : MonoBehaviour
 	public void Initialize(float timeElapsed)
     {
         Force = BaseForce + Force - Mathf.Lerp(0, Force, timeElapsed / GameManager.Instance.MaxLaserChargeTime);
-        //Debug.LogFormat("Force: {0}", Force);
+
+        transform.localScale = Vector3.zero;
+        transform.localScale += Vector3.one * Mathf.Lerp(1, MaxScale, timeElapsed / GameManager.Instance.MaxLaserChargeTime);
+
+        transform.position += transform.forward * (transform.localScale.z);
+
+
     }
 	
 	#endregion
