@@ -50,11 +50,14 @@ public class Spaceship : MonoBehaviour
 	}
 
 	void Update() 
-	{        
+	{
+        //Debug.LogFormat("Velocity: {0}", _rigidbody.velocity.magnitude);
 	}
 
     void FixedUpdate()
     {
+        Debug.LogFormat("Magnitud: {0} | Max {1}", _rigidbody.velocity.magnitude, MaxVelocity);
+
         if (_rigidbody.velocity.sqrMagnitude > _sqrMaxVelocity)
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
@@ -67,9 +70,9 @@ public class Spaceship : MonoBehaviour
             _force *= BoostMultiplier;
         }
 
-        Debug.LogFormat("Force: {0}", _force);
+        //Debug.LogFormat("Force: {0}", _force);
 
-        _rigidbody.AddRelativeForce(Vector3.forward * IdleForce);
+        _rigidbody.AddRelativeForce(Vector3.forward * _force);
 
 
         _rigidbody.AddRelativeTorque(Vector3.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);

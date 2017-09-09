@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c9ca8efe44bfff4292e4259ccc94d13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ForwardForce: 10
+  BoostMultiplier: 20
   IdleForce: 10
   InvertedPitch: 1
   PitchTorque: 0.1
