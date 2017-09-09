@@ -12,6 +12,8 @@ public class Spaceship : MonoBehaviour
     [Header("Force")]
     public float BoostMultiplier = 1;
     public float IdleForce = 1;
+    public float RecoilForce = 1;
+    public float RecoilTime = 1;
 
     [Header("Torque")]
     public bool InvertedPitch = true;
@@ -30,6 +32,7 @@ public class Spaceship : MonoBehaviour
     private float _force;
     private float _fireButtonDownTimer;
     private bool _isFired;
+    private bool _isRecoil;
 
 
     private Vector2 AxisLeft
@@ -82,6 +85,8 @@ public class Spaceship : MonoBehaviour
 
                 if (_fireButtonDownTimer >= GameManager.Instance.MaxLaserChargeTime)
                 {
+                    StartCoroutine(RecoilCoroutine());
+
                     Debug.Log("Time's up");
                     InstantiateLaser();
                 }
@@ -102,23 +107,26 @@ public class Spaceship : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_rigidbody.velocity.sqrMagnitude > _sqrMaxVelocity)
+        if (!_isRecoil)
         {
-            _rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
+            if (_rigidbody.velocity.sqrMagnitude > _sqrMaxVelocity)
+            {
+                _rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
+            }
+
+            _force = IdleForce;
+
+            if (Trigger > 0)
+            {
+                _force *= BoostMultiplier;
+            }
+
+            _rigidbody.AddRelativeForce(Vector3.forward * _force);
+
+
+            _rigidbody.AddRelativeTorque(Vector3.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
+            _rigidbody.AddRelativeTorque(Vector3.up * AxisLeft.x * YawTorque);
         }
-
-        _force = IdleForce;
-
-        if (Trigger > 0)
-        {
-            _force *= BoostMultiplier;
-        }
-
-        _rigidbody.AddRelativeForce(Vector3.forward * _force);
-
-
-        _rigidbody.AddRelativeTorque(Vector3.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
-        _rigidbody.AddRelativeTorque(Vector3.up * AxisLeft.x * YawTorque);
     }
 
     #endregion
@@ -133,6 +141,20 @@ public class Spaceship : MonoBehaviour
 
         _isFired = true;
         _fireButtonDownTimer = 0;
+    }
+
+    #endregion
+    #region Coroutines
+
+    private IEnumerator RecoilCoroutine()
+    {
+        _isRecoil = true;
+
+        _rigidbody.AddRelativeForce(-Vector3.forward * RecoilForce, ForceMode.Impulse);
+
+        yield return new WaitForSeconds(RecoilTime);
+
+        _isRecoil = false;
     }
 
     #endregion
