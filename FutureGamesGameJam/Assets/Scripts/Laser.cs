@@ -6,6 +6,7 @@ public class Laser : MonoBehaviour
     #region Fields/Properties
 
     public float Force = 1;
+    public float DamagePoints = 1;
 
     private Rigidbody _rigidbody;
 

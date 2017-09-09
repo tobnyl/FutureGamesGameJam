@@ -26,6 +26,7 @@ public class Spaceship : MonoBehaviour
     private bool _isFiring;
     private float _sqrMaxVelocity;
     private float _force;
+    private float _fireButtonDownTimer;
 
 
     private Vector2 AxisLeft
@@ -38,15 +39,25 @@ public class Spaceship : MonoBehaviour
         get { return Input.GetAxis("Boost"); }
     }
 
-    private bool FireButton
+    private bool FireButtonDown
     {
         get { return Input.GetButtonDown("Fire1"); }
     }
 
-	#endregion
-	#region Events
-	
-	void Awake()
+    private bool FireButtonUp
+    {
+        get { return Input.GetButtonUp("Fire1"); }
+    }
+
+    private bool FireButton
+    {
+        get { return Input.GetButton("Fire1"); }
+    }
+
+    #endregion
+    #region Events
+
+    void Awake()
 	{
         _rigidbody = GetComponent<Rigidbody>();
 
@@ -60,9 +71,20 @@ public class Spaceship : MonoBehaviour
 
 	void Update() 
 	{
-        if (FireButton)
+        if (FireButtonDown)
         {
             Instantiate(LaserPrefab, FireSpawnPoint.position, FireSpawnPoint.rotation);
+        }
+
+        if (FireButton)
+        {
+            _fireButtonDownTimer += Time.deltaTime;
+        }
+        else if (FireButtonUp)
+        {
+            Debug.LogFormat("Timer: {0}", _fireButtonDownTimer);
+
+            _fireButtonDownTimer = 0;
         }
 	}
 
