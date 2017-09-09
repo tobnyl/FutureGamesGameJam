@@ -26,6 +26,14 @@ public class Laser : MonoBehaviour
 	{
 		
 	}
+
+    void OnCollisionEnter(Collision c)
+    {
+        if (c.gameObject.layer == LayerMask.NameToLayer("Moon"))
+        {
+            Destroy(gameObject);
+        }
+    }
 	
 	#endregion
 	#region Methods
