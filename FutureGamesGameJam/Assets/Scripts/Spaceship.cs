@@ -40,6 +40,11 @@ public class Spaceship : MonoBehaviour
         get { return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); }
     }
 
+    private Vector2 AxisRight
+    {
+        get { return new Vector2(Input.GetAxisRaw("Horizontal2"), Input.GetAxisRaw("Vertical2")); }
+    }
+
     private float Trigger
     {
         get { return Input.GetAxis("Boost"); }
@@ -126,6 +131,7 @@ public class Spaceship : MonoBehaviour
 
             _rigidbody.AddRelativeTorque(Vector3.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
             _rigidbody.AddRelativeTorque(Vector3.up * AxisLeft.x * YawTorque);
+            _rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
         }
     }
 
