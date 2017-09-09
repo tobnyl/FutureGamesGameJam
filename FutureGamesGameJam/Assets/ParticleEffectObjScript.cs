@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class ParticleEffectObjScript : MonoBehaviour
 {
-
 	float lifetime;
+	ParticleSystem ps;
 
 	// Use this for initialization
 	void Start()
 	{
-		StartCoroutine("KillMe");
+		
 	}
 
 	// Update is called once per frame
@@ -19,9 +19,20 @@ public class ParticleEffectObjScript : MonoBehaviour
 
 	}
 
+	public void SetScale(Vector3 scale)
+	{
+		ps = transform.GetChild(0).GetComponent<ParticleSystem>();
+		print(ps);
+		StartCoroutine("KillMe");
+		transform.GetChild(0).transform.localScale = scale * 2;
+		ps.startSize = scale.x;
+		ps.Play();
+
+	}
+
 	IEnumerator KillMe()
 	{
-		yield return new WaitForSeconds(transform.GetChild(0).GetComponent<ParticleSystem>().startLifetime);
+		yield return new WaitForSeconds(ps.startLifetime);
 		Destroy(gameObject);
 	}
 }
