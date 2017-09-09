@@ -27,7 +27,7 @@ public class AsteroidSpawner : MonoBehaviour
 	{
 
 		GameObject g = (GameObject)Instantiate(plainAsteroid);
-		g.transform.position = new Vector3(0, 0, 200);
+		g.transform.position = new Vector3(0, 0, 100);
 
 		g.transform.RotateAround(moon.position, Vector3.up, Random.Range(0, 360));
 		g.transform.RotateAround(moon.position, Vector3.forward, Random.Range(0, 360));
