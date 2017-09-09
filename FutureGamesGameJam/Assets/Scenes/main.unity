@@ -473,6 +473,16 @@ Prefab:
       propertyPath: m_RootOrder
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 114847145792571974, guid: 5cf873c0f7b8aa644aab445e45f5509c,
+        type: 2}
+      propertyPath: BoostForce
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 114847145792571974, guid: 5cf873c0f7b8aa644aab445e45f5509c,
+        type: 2}
+      propertyPath: BoostMultiplier
+      value: 1.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cf873c0f7b8aa644aab445e45f5509c, type: 2}
   m_IsPrefabParent: 0

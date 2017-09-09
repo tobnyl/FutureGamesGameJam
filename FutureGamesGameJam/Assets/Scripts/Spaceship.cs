@@ -6,7 +6,7 @@ public class Spaceship : MonoBehaviour
     #region Fields/Properties
 
     [Header("Force")]
-    public float ForwardForce = 1;
+    public float BoostMultiplier = 1;
     public float IdleForce = 1;
 
     [Header("Torque")]
@@ -20,7 +20,10 @@ public class Spaceship : MonoBehaviour
 
     private Rigidbody _rigidbody;
     private bool _isFiring;
-	
+    private float _sqrMaxVelocity;
+    private float _force;
+
+
     private Vector2 AxisLeft
     {
         get { return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); }
@@ -37,6 +40,8 @@ public class Spaceship : MonoBehaviour
 	void Awake()
 	{
         _rigidbody = GetComponent<Rigidbody>();
+
+        _sqrMaxVelocity = MaxVelocity * MaxVelocity;        
 	}
 	
 	void Start() 
@@ -45,21 +50,24 @@ public class Spaceship : MonoBehaviour
 	}
 
 	void Update() 
-	{
-        Debug.LogFormat("Boost: {0}", Trigger);
+	{        
 	}
 
     void FixedUpdate()
     {
-        if (_rigidbody.velocity.magnitude > MaxVelocity)
+        if (_rigidbody.velocity.sqrMagnitude > _sqrMaxVelocity)
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
         }
 
-        //if (Trigger > 0)
-        //{
-        //    _rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
-        //}
+        _force = IdleForce;
+
+        if (Trigger > 0)
+        {
+            _force *= BoostMultiplier;
+        }
+
+        Debug.LogFormat("Force: {0}", _force);
 
         _rigidbody.AddRelativeForce(Vector3.forward * IdleForce);
 
