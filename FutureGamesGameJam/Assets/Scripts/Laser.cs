@@ -5,6 +5,7 @@ public class Laser : MonoBehaviour
 {
     #region Fields/Properties
 
+    public float BaseForce = 1;
     public float Force = 1;
     public float DamagePoints = 1;
 
@@ -49,7 +50,8 @@ public class Laser : MonoBehaviour
 	
 	public void Initialize(float timeElapsed)
     {
-        Force -= Mathf.Lerp(0, 100, timeElapsed / GameManager.Instance.MaxLaserChargeTime);
+        Force = BaseForce + Force - Mathf.Lerp(0, Force, timeElapsed / GameManager.Instance.MaxLaserChargeTime);
+        //Debug.LogFormat("Force: {0}", Force);
     }
 	
 	#endregion
