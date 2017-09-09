@@ -5,11 +5,24 @@ public class Spaceship : MonoBehaviour
 {
     #region Fields/Properties
 
+    [Header("Force")]
+    public float ForwardForce = 1;
+    public float IdleForce = 1;
+
+    [Header("Torque")]
+    public bool InvertedPitch = true;
+    public float PitchTorque = 1;
+    public float YawTorque = 1;
+    public float RollTorque = 1;
+
+    [Header("Max")]
+    public float MaxVelocity = 20;
+
     private Rigidbody _rigidbody;
 	
     private Vector2 AxisLeft
     {
-        get { return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical") * -1); }
+        get { return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); }
     }
 
 	#endregion
@@ -32,11 +45,32 @@ public class Spaceship : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (_rigidbody.velocity.magnitude > MaxVelocity)
+        {
+            _rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
 
-        Debug.LogFormat("Axis: {0}", AxisLeft);
+        }
 
-        _rigidbody.AddForce(transform.forward * AxisLeft.x);
-        _rigidbody.AddForce(transform.right * AxisLeft.y);
+        //if (Trigger > 0)
+        //{
+        //    _rigidbody.AddForce(transform.forward * Trigger * ForwardForce);
+        //}
+
+        _rigidbody.AddForce(transform.forward * IdleForce);
+
+
+        _rigidbody.AddTorque(transform.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
+        _rigidbody.AddTorque(transform.up * AxisLeft.x * YawTorque);
+        _rigidbody.AddTorque(transform.forward * (-AxisLeft.x) * RollTorque);
+
+        //if (_isFiringRight)
+        //{
+        //    AudioManager.Instance.Play(LazerSfx, transform.position);
+
+        //    InstantiateProjectile(SpawnLeft);
+        //    InstantiateProjectile(SpawnRight);
+        //    _isFiringRight = false;
+        //}
 
     }
 
