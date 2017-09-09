@@ -154,7 +154,7 @@ public class Spaceship : MonoBehaviour
         if (c.gameObject.layer == LayerMask.NameToLayer("Moon"))
         {
             Debug.Log("Yes");
-            _playerHealth.TakeDamage(1);
+            _playerHealth.TakeDamage(10);
             Destroy(Mesh);
             _rigidbody.isKinematic = true;
         }
