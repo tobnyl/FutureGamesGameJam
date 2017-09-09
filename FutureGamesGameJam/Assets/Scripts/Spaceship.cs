@@ -60,9 +60,6 @@ public class Spaceship : MonoBehaviour
 
 	void Update() 
 	{
-        //Debug.LogFormat("FirButton: {0}", FireButton);
-        //Debug.LogFormat("Velocity: {0}", _rigidbody.velocity.magnitude);
-
         if (FireButton)
         {
             Instantiate(LaserPrefab, FireSpawnPoint.position, FireSpawnPoint.rotation);
@@ -71,8 +68,6 @@ public class Spaceship : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Debug.LogFormat("Magnitud: {0} | Max {1}", _rigidbody.velocity.magnitude, MaxVelocity);
-
         if (_rigidbody.velocity.sqrMagnitude > _sqrMaxVelocity)
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
@@ -85,24 +80,11 @@ public class Spaceship : MonoBehaviour
             _force *= BoostMultiplier;
         }
 
-        //Debug.LogFormat("Force: {0}", _force);
-
         _rigidbody.AddRelativeForce(Vector3.forward * _force);
 
 
         _rigidbody.AddRelativeTorque(Vector3.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
         _rigidbody.AddRelativeTorque(Vector3.up * AxisLeft.x * YawTorque);
-        //_rigidbody.AddRelativeTorque(transform.forward * (-AxisLeft.x) * RollTorque);
-
-        //if (_isFiringRight)
-        //{
-        //    AudioManager.Instance.Play(LazerSfx, transform.position);
-
-        //    InstantiateProjectile(SpawnLeft);
-        //    InstantiateProjectile(SpawnRight);
-        //    _isFiringRight = false;
-        //}
-
     }
 
     #endregion
