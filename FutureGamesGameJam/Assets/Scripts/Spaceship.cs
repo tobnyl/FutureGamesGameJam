@@ -90,6 +90,7 @@ public class Spaceship : MonoBehaviour
             {
                 Debug.Log("Fire button up");
                 InstantiateLaser();
+                _isFired = false;
             }
         }
         else if (_isFired && FireButtonUp)
