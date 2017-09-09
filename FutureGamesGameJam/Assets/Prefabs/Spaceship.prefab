@@ -536,8 +536,9 @@ MonoBehaviour:
   RecoilForce: 100
   RecoilTime: 0.5
   InvertedPitch: 1
+  BoostTorqueMultiplier: 6
   PitchTorque: 1.5
-  YawTorque: 1
+  YawTorque: 1.5
   RollTorque: 1
   MaxVelocity: 20
   MaxAngularVelocity: 0.5
