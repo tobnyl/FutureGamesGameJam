@@ -38,19 +38,25 @@ public class Laser : MonoBehaviour
         }
 	}
 
+    private bool _isDestroyed;
     void OnTriggerEnter(Collider c)
     {
-        var otherLayer = c.gameObject.layer;
+        if (!_isDestroyed)
+        {
+            var otherLayer = c.gameObject.layer;
 
-        if (otherLayer == LayerMask.NameToLayer("Moon"))
-        {
-            Destroy(gameObject);
-        }
-        else if (otherLayer == LayerMask.NameToLayer("Asteroid"))
-        {
-            Debug.Log("Hit asteroid");
-            var asteroid = c.gameObject.GetComponent<AsteroidLogic>() ?? c.gameObject.GetComponentInParent<AsteroidLogic>(); ;
-            asteroid.TakeDamage(DamagePoints);
+            if (otherLayer == LayerMask.NameToLayer("Moon"))
+            {
+                Destroy(gameObject);
+            }
+            else if (otherLayer == LayerMask.NameToLayer("Asteroid"))
+            {
+                _isDestroyed = true;
+                Destroy(gameObject);
+                Debug.Log("Hit asteroid");
+                var asteroid = c.gameObject.GetComponent<AsteroidLogic>() ?? c.gameObject.GetComponentInParent<AsteroidLogic>(); ;
+                asteroid.TakeDamage(DamagePoints);
+            }
         }
     }
 	

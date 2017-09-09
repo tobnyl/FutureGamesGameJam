@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class AsteroidLogic : MonoBehaviour
@@ -31,13 +32,18 @@ public class AsteroidLogic : MonoBehaviour
 	Vector3 direction;
 	Vector3 modelRotDir;
 
-	//This is the valeu thats used by the code to move the asteroid
-	float moveSpeed;
+    private FracturedObject _fracturedObject;
+    private List<FracturedChunk> _chunkList;
+
+    //This is the valeu thats used by the code to move the asteroid
+    float moveSpeed;
 
 	// Use this for initialization
 	void Start()
 	{
-
+        _fracturedObject = GetComponent<FracturedObject>();
+        _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();
+        var derp = "derp";
 	}
 
     public void TakeDamage(float amount)
@@ -46,7 +52,13 @@ public class AsteroidLogic : MonoBehaviour
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
+            foreach (var chunk in _chunkList)
+            {
+                chunk.gameObject.layer = LayerMask.NameToLayer("Chunk");
+            }
+
+            _fracturedObject.Explode(transform.position, 100f);
         }
     }
 
