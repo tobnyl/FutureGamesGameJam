@@ -5,6 +5,9 @@ public class Spaceship : MonoBehaviour
 {
     #region Fields/Properties
 
+    [Header("Fire Spawn Point")]
+    public Transform FireSpawnPoint;
+
     [Header("Force")]
     public float BoostMultiplier = 1;
     public float IdleForce = 1;
@@ -34,6 +37,11 @@ public class Spaceship : MonoBehaviour
         get { return Input.GetAxis("Boost"); }
     }
 
+    private bool FireButton
+    {
+        get { return Input.GetButtonDown("Fire1"); }
+    }
+
 	#endregion
 	#region Events
 	
@@ -51,12 +59,13 @@ public class Spaceship : MonoBehaviour
 
 	void Update() 
 	{
+        Debug.LogFormat("FirButton: {0}", FireButton);
         //Debug.LogFormat("Velocity: {0}", _rigidbody.velocity.magnitude);
 	}
 
     void FixedUpdate()
     {
-        Debug.LogFormat("Magnitud: {0} | Max {1}", _rigidbody.velocity.magnitude, MaxVelocity);
+        //Debug.LogFormat("Magnitud: {0} | Max {1}", _rigidbody.velocity.magnitude, MaxVelocity);
 
         if (_rigidbody.velocity.sqrMagnitude > _sqrMaxVelocity)
         {
