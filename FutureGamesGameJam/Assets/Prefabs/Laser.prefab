@@ -141,6 +141,7 @@ MonoBehaviour:
   BaseForce: 40
   Force: 100
   DamagePoints: 10
+  DamageMaxMultiplier: 10
   MaxScale: 10
 --- !u!136 &136526143081813374
 CapsuleCollider:
@@ -149,7 +150,7 @@ CapsuleCollider:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1578387598102166}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 0.5000001
   m_Height: 2

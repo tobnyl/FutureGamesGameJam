@@ -11,13 +11,14 @@ public class Spaceship : MonoBehaviour
     public GameObject Mesh;
 
     [Header("Force")]
-    public float BoostMultiplier = 1;
+    public float BoostMultiplier = 1;    
     public float IdleForce = 1;
     public float RecoilForce = 1;
     public float RecoilTime = 1;
 
     [Header("Torque")]
     public bool InvertedPitch = true;
+    public float BoostTorqueMultiplier = 1;
     public float PitchTorque = 1;
     public float YawTorque = 1;
     public float RollTorque = 1;
@@ -37,6 +38,9 @@ public class Spaceship : MonoBehaviour
     private float _fireButtonDownTimer;
     private bool _isFired;
     private bool _isRecoil;
+    private float _pitchTorque;
+    private float _yawTorque;
+    private float _rollTorque;
 
 
     private Vector2 AxisLeft
@@ -134,18 +138,24 @@ public class Spaceship : MonoBehaviour
             }
 
             _force = IdleForce;
+            _pitchTorque = PitchTorque;
+            _yawTorque = YawTorque;
+            _rollTorque = RollTorque;
 
             if (Trigger > 0)
             {
                 _force *= BoostMultiplier;
+                _pitchTorque *= BoostTorqueMultiplier;
+                _yawTorque *= BoostTorqueMultiplier;
+                _rollTorque *= BoostTorqueMultiplier;
             }
 
             _rigidbody.AddRelativeForce(Vector3.forward * _force);
 
 
-            _rigidbody.AddRelativeTorque(Vector3.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * PitchTorque);
-            _rigidbody.AddRelativeTorque(Vector3.up * AxisLeft.x * YawTorque);
-            _rigidbody.AddTorque(transform.forward * (-AxisRight.x) * RollTorque);
+            _rigidbody.AddRelativeTorque(Vector3.right * (InvertedPitch ? AxisLeft.y : -AxisLeft.y) * _pitchTorque);
+            _rigidbody.AddRelativeTorque(Vector3.up * AxisLeft.x * _yawTorque);
+            _rigidbody.AddTorque(transform.forward * (-AxisRight.x) * _rollTorque);
         }
     }
 
@@ -154,7 +164,7 @@ public class Spaceship : MonoBehaviour
         if (c.gameObject.layer == LayerMask.NameToLayer("Moon"))
         {
             Debug.Log("Yes");
-            _playerHealth.TakeDamage(1);
+            _playerHealth.TakeDamage(10);
             Destroy(Mesh);
             _rigidbody.isKinematic = true;
         }

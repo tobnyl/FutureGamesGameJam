@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 114807170285860694}
   - component: {fileID: 96715367089911320}
   - component: {fileID: 64727235015731572}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Model
   m_TagString: Asteroid
   m_Icon: {fileID: 0}
@@ -40,7 +40,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4100818371655612}
   - component: {fileID: 114332036876339024}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Asteroid
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,8 +54,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1264966301028644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.21, z: -6.19}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -0.02, y: 0, z: -105}
+  m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children:
   - {fileID: 4658301708414920}
   m_Father: {fileID: 0}
@@ -240,7 +240,6 @@ MonoBehaviour:
   movementSpeedDifRange: 0.015
   baseMass: 50
   baseHp: 10
-  deathTime: 8
   ParticleObject: {fileID: 1416509806047940, guid: 68f9fd7b2a906e2468d0d50379db2e2a,
     type: 2}
   rotationSpeed: 0.001
