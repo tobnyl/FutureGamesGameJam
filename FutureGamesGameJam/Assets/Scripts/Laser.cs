@@ -50,7 +50,7 @@ public class Laser : MonoBehaviour
         {
             Debug.Log("Hit asteroid");
             var asteroid = c.gameObject.GetComponent<AsteroidLogic>() ?? c.gameObject.GetComponentInParent<AsteroidLogic>(); ;
-            asteroid.TakeDamage(10);
+            asteroid.TakeDamage(DamagePoints);
         }
     }
 	
