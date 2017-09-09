@@ -40,6 +40,16 @@ public class AsteroidLogic : MonoBehaviour
 
 	}
 
+    public void TakeDamage(float amount)
+    {
+        health -= amount;
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }
+    }
+
 	public void SetUpAsteroid(Transform moon)
 	{
 		asteroidModel = transform.GetChild(0);
