@@ -19,7 +19,7 @@ GameObject:
   serializedVersion: 5
   m_Component:
   - component: {fileID: 4764426681927792}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: FireSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4079139705588202}
   - component: {fileID: 54879340147411318}
   - component: {fileID: 114847145792571974}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Spaceship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   - component: {fileID: 33444309456100742}
   - component: {fileID: 136145430339269150}
   - component: {fileID: 23375161260077930}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Mesh
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 92238581013634332}
   - component: {fileID: 124860087283027832}
   - component: {fileID: 81877142770803868}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Camera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
@@ -251,6 +251,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   FireSpawnPoint: {fileID: 4764426681927792}
+  LaserPrefab: {fileID: 1940657852254230, guid: 719c589cddae66f4db7a6f8505a5a046,
+    type: 2}
   BoostMultiplier: 20
   IdleForce: 10
   InvertedPitch: 1

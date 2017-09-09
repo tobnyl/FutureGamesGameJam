@@ -5,8 +5,9 @@ public class Spaceship : MonoBehaviour
 {
     #region Fields/Properties
 
-    [Header("Fire Spawn Point")]
+    [Header("Objects")]
     public Transform FireSpawnPoint;
+    public GameObject LaserPrefab;
 
     [Header("Force")]
     public float BoostMultiplier = 1;
@@ -59,8 +60,13 @@ public class Spaceship : MonoBehaviour
 
 	void Update() 
 	{
-        Debug.LogFormat("FirButton: {0}", FireButton);
+        //Debug.LogFormat("FirButton: {0}", FireButton);
         //Debug.LogFormat("Velocity: {0}", _rigidbody.velocity.magnitude);
+
+        if (FireButton)
+        {
+            Instantiate(LaserPrefab, FireSpawnPoint.position, FireSpawnPoint.rotation);
+        }
 	}
 
     void FixedUpdate()
