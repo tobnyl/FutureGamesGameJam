@@ -66,6 +66,7 @@ public class AsteroidLogic : MonoBehaviour
             }
 
             _fracturedObject.Explode(transform.position, 100f);
+            StartCoroutine(DestroyMeshColliders());
         }
     }
 
@@ -105,7 +106,7 @@ public class AsteroidLogic : MonoBehaviour
         float sizeDifference = (asteroidMaxSize - asteroidMinSize) * size_;
         float _vecSize = asteroidMinSize + sizeDifference;
 
-        print(_vecSize);
+        //print(_vecSize);
 
         asteroidModel.localScale = new Vector3(_vecSize, _vecSize, _vecSize);
 
@@ -148,5 +149,17 @@ public class AsteroidLogic : MonoBehaviour
         movementSpeed = 0;
         yield return new WaitForSeconds(deathTime - 0.25f);
         Destroy(gameObject);
+    }
+
+    IEnumerator DestroyMeshColliders()
+    {
+        yield return new WaitForSeconds(1f);
+
+        Debug.Log("Remove mesh colliders");
+
+        foreach (var chunk in _chunkList)
+        {
+            Destroy(chunk.gameObject.GetComponent<MeshCollider>());
+        }        
     }
 }
