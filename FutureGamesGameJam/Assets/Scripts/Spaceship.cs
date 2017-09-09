@@ -19,10 +19,16 @@ public class Spaceship : MonoBehaviour
     public float MaxVelocity = 20;
 
     private Rigidbody _rigidbody;
+    private bool _isFiring;
 	
     private Vector2 AxisLeft
     {
         get { return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical")); }
+    }
+
+    private float Trigger
+    {
+        get { return Input.GetAxis("Boost"); }
     }
 
 	#endregion
@@ -40,7 +46,7 @@ public class Spaceship : MonoBehaviour
 
 	void Update() 
 	{
-		
+        Debug.LogFormat("Boost: {0}", Trigger);
 	}
 
     void FixedUpdate()
@@ -48,7 +54,6 @@ public class Spaceship : MonoBehaviour
         if (_rigidbody.velocity.magnitude > MaxVelocity)
         {
             _rigidbody.velocity = _rigidbody.velocity.normalized * MaxVelocity;
-
         }
 
         //if (Trigger > 0)
