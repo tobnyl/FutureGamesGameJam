@@ -82,16 +82,19 @@ public class Spaceship : MonoBehaviour
 
                 if (_fireButtonDownTimer >= GameManager.Instance.MaxLaserChargeTime)
                 {
+                    Debug.Log("Time's up");
                     InstantiateLaser();
                 }
             }
             else if (FireButtonUp)
             {
+                Debug.Log("Fire button up");
                 InstantiateLaser();
             }
         }
         else if (_isFired && FireButtonUp)
         {
+            Debug.Log("Is Fired false");
             _isFired = false;
         }
     }
