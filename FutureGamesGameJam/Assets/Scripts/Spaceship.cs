@@ -41,6 +41,7 @@ public class Spaceship : MonoBehaviour
     private float _pitchTorque;
     private float _yawTorque;
     private float _rollTorque;
+    private bool _isImmune;
 
 
     private Vector2 AxisLeft
@@ -161,12 +162,16 @@ public class Spaceship : MonoBehaviour
 
     private void OnTriggerEnter(Collider c)
     {
-        if (c.gameObject.layer == LayerMask.NameToLayer("Moon"))
-        {
-            Debug.Log("Yes");
+        if (c.gameObject.layer == Layers.Moon.Index)
+        {            
             _playerHealth.TakeDamage(10);
             Destroy(Mesh);
             _rigidbody.isKinematic = true;
+        }
+        else if (!_isImmune && c.gameObject.layer == Layers.Asteroid.Index)
+        {
+            _playerHealth.TakeDamage(1);
+            StartCoroutine(ImmuneCoroutine());
         }
     }
 
@@ -196,6 +201,15 @@ public class Spaceship : MonoBehaviour
         yield return new WaitForSeconds(RecoilTime);
 
         _isRecoil = false;
+    }
+
+    private IEnumerator ImmuneCoroutine()
+    {
+        _isImmune = true;
+
+        yield return new WaitForSeconds(GameManager.Instance.ImmuneTime);
+
+        _isImmune = false;
     }
 
     #endregion

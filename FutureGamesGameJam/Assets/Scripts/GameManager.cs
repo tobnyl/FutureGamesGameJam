@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Spaceship")]
     public float MaxLaserChargeTime;
+    public float ImmuneTime;
 
     [Header("Laser")]
     public float LaserMaxDistance;

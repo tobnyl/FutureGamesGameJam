@@ -45,11 +45,11 @@ public class Laser : MonoBehaviour
         {
             var otherLayer = c.gameObject.layer;
 
-            if (otherLayer == LayerMask.NameToLayer("Moon"))
+            if (otherLayer == Layers.Moon.Index)
             {
                 Destroy(gameObject);
             }
-            else if (otherLayer == LayerMask.NameToLayer("Asteroid"))
+            else if (otherLayer == Layers.Asteroid.Index)
             {
                 _isDestroyed = true;
                 Destroy(gameObject);

@@ -53,6 +53,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   MaxLaserChargeTime: 3
+  ImmuneTime: 0.2
   LaserMaxDistance: 500
 --- !u!114 &114808287091569100
 MonoBehaviour:
@@ -68,5 +69,7 @@ MonoBehaviour:
   moon: {fileID: 0}
   plainAsteroid: {fileID: 1264966301028644, guid: fcdfac9e8ec66124e8d729b769ac9f75,
     type: 2}
+  AsteroidPrefabs:
+  - {fileID: 0}
   baseSpawnDistance: 150
   elapsedSecPerWaveSec: 45
