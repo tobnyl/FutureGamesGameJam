@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameOver : MonoBehaviour
 {
@@ -17,26 +18,22 @@ public class GameOver : MonoBehaviour
 		span = TimeSpan.FromSeconds(_time);
 
 		timeText.text = ("You saved the moon for " + span.Minutes + " minutes and " + span.Seconds + " seconds!");
+
+	}
+
+	public void PlayAgain()
+	{
+		SceneManager.LoadScene(1);
+	}
+
+	public void QuitGame()
+	{
+		Application.Quit();
 	}
 
 	// Update is called once per frame
 	void Update()
 	{
 
-	}
-
-	static string GenTimeSpanFromHours(double seconds)
-	{
-		// Create a TimeSpan object and TimeSpan string from 
-		// a number of hours.
-		System.TimeSpan interval = System.TimeSpan.FromSeconds(seconds);
-		string timeInterval = interval.ToString();
-
-		// Pad the end of the TimeSpan string with spaces if it 
-		// does not contain milliseconds.
-		int pIndex = timeInterval.IndexOf(':');
-		pIndex = timeInterval.IndexOf('.', pIndex);
-		if (pIndex < 0) timeInterval += "        ";
-		return timeInterval;
 	}
 }
