@@ -28,8 +28,8 @@ public class AsteroidModelScript : MonoBehaviour
         modelRotDir = rot;
 	}
 
-	private void OnTriggerEnter(Collider other)
-	{
-		transform.parent.GetComponent<AsteroidLogic>().Collided(other.tag);
-	}
+	//private void OnTriggerEnter(Collider other)
+	//{        
+	//	transform.parent.GetComponent<AsteroidLogic>().Collided(other.tag);
+	//}
 }

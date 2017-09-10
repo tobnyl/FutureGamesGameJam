@@ -130,21 +130,25 @@ public class AsteroidLogic : MonoBehaviour
 
     }
 
-
+    private void OnTriggerEnter(Collider other)
+    {
+        Collided(other.tag);
+    }
 
     public void Collided(string typeHit)
     {
-        //collision code here
+        //collision code here        
 
         if (typeHit == "Moon")
         {
             //Play particle effect
-            GameObject g = Instantiate(ParticleObject, asteroidModel.transform.position, Quaternion.identity) as GameObject;
-            g.GetComponent<ParticleEffectObjScript>().SetScale(transform.localScale);
-            asteroidModel.GetComponent<Collider>().enabled = false;
-            asteroidModel.GetComponent<Renderer>().enabled = false;
+            //GameObject g = Instantiate(ParticleObject, asteroidModel.transform.position, Quaternion.identity) as GameObject;
+            //g.GetComponent<ParticleEffectObjScript>().SetScale(transform.localScale);
+            //asteroidModel.GetComponent<Collider>().enabled = false;
+            //asteroidModel.GetComponent<Renderer>().enabled = false;
 
-            StartCoroutine("DestroySelf");
+            //StartCoroutine("DestroySelf");
+            _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
         }
 
         else if (typeHit == "Player")
@@ -157,7 +161,7 @@ public class AsteroidLogic : MonoBehaviour
     {
         yield return new WaitForSeconds(1f);
         movementSpeed = 0;
-        yield return new WaitForSeconds(deathTime - 0.25f);
+        //yield return new WaitForSeconds(deathTime - 0.25f);
         Destroy(gameObject);
     }
 

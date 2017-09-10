@@ -22,9 +22,16 @@ public class Moon : MonoBehaviour
 	}
 
 	void Update() 
-	{
-		
+	{		
 	}
+
+    private void OnTriggerEnter(Collider c)
+    {
+        if (c.gameObject.layer == Layers.Asteroid.Index)
+        {
+            Debug.Log("ASteroid hit moon");
+        }
+    }
 	
 	#endregion
 	#region Methods
