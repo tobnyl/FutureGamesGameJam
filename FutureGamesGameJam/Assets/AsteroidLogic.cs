@@ -72,6 +72,8 @@ public class AsteroidLogic : MonoBehaviour
 
             _fracturedObject.Explode(transform.position, 100f);
             StartCoroutine(DestroyMeshColliders());
+            StartCoroutine(DestroyChunksAndGameObject());
+            
             Destroy(_trailRenderer);
         }
     }
@@ -157,9 +159,9 @@ public class AsteroidLogic : MonoBehaviour
         Destroy(gameObject);
     }
 
-    IEnumerator DestroyMeshColliders()
+    private IEnumerator DestroyMeshColliders()
     {
-        yield return new WaitForSeconds(1f);
+        yield return new WaitForSeconds(GameManager.Instance.DestroyMeshCollidersTime);
 
         Debug.Log("Remove mesh colliders");
 
@@ -167,5 +169,17 @@ public class AsteroidLogic : MonoBehaviour
         {
             Destroy(chunk.gameObject.GetComponent<MeshCollider>());
         }        
+    }
+
+    private IEnumerator DestroyChunksAndGameObject()
+    {
+        yield return new WaitForSeconds(GameManager.Instance.DestroyChunksTime);
+
+        foreach (var chunk in _chunkList)
+        {
+            Destroy(chunk.gameObject);
+        }
+
+        Destroy(gameObject);
     }
 }

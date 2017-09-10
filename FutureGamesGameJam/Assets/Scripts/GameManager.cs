@@ -12,7 +12,9 @@ public class GameManager : MonoBehaviour
     [Header("Laser")]
     public float LaserMaxDistance;
 
-    [Header("Chunks")]
+    [Header("Asteroids")]
+    public float DestroyMeshCollidersTime;
+    public float DestroyChunksTime;
     public GameObject ChunksParent;
 
     #endregion
