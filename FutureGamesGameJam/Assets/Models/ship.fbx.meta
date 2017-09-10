@@ -6,10 +6,75 @@ ModelImporter:
   serializedVersion: 21
   fileIDToRecycleName:
     100000: //RootNode
+    100002: door
+    100004: doorWindow
+    100006: fin_01
+    100008: fin_02
+    100010: fin_03
+    100012: leftEngine
+    100014: rightEngine
+    100016: safetyRing
+    100018: shipBody
+    100020: shipWindow
+    100022: stepHandle_01
+    100024: stepHandle_02
+    100026: stepHandle_03
     400000: //RootNode
+    400002: door
+    400004: doorWindow
+    400006: fin_01
+    400008: fin_02
+    400010: fin_03
+    400012: leftEngine
+    400014: rightEngine
+    400016: safetyRing
+    400018: shipBody
+    400020: shipWindow
+    400022: stepHandle_01
+    400024: stepHandle_02
+    400026: stepHandle_03
     2300000: //RootNode
+    2300002: door
+    2300004: doorWindow
+    2300006: fin_01
+    2300008: fin_02
+    2300010: fin_03
+    2300012: leftEngine
+    2300014: rightEngine
+    2300016: safetyRing
+    2300018: shipBody
+    2300020: shipWindow
+    2300022: stepHandle_01
+    2300024: stepHandle_02
+    2300026: stepHandle_03
     3300000: //RootNode
+    3300002: door
+    3300004: doorWindow
+    3300006: fin_01
+    3300008: fin_02
+    3300010: fin_03
+    3300012: leftEngine
+    3300014: rightEngine
+    3300016: safetyRing
+    3300018: shipBody
+    3300020: shipWindow
+    3300022: stepHandle_01
+    3300024: stepHandle_02
+    3300026: stepHandle_03
     4300000: shipBody1
+    4300002: shipBody
+    4300004: shipWindow
+    4300006: safetyRing
+    4300008: doorWindow
+    4300010: door
+    4300012: stepHandle_01
+    4300014: stepHandle_02
+    4300016: stepHandle_03
+    4300018: fin_01
+    4300020: fin_02
+    4300022: fin_03
+    4300024: leftEngine
+    4300026: rightEngine
     9500000: //RootNode
   materials:
     importMaterials: 1
