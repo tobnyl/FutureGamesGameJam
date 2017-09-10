@@ -44,7 +44,7 @@ public class AsteroidLogic : MonoBehaviour
     Vector3 modelRotDir;
 
     private FracturedObject _fracturedObject;
-    private List<FracturedChunk> _chunkList;
+    private List<Transform> _chunkList;
     private TrailRenderer _trailRenderer;
 
     //This is the valeu thats used by the code to move the asteroid
@@ -54,7 +54,7 @@ public class AsteroidLogic : MonoBehaviour
     void Start()
     {
         _fracturedObject = GetComponentInChildren<FracturedObject>();
-        _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();
+        _chunkList = GetComponentsInChildren<Transform>().ToList();
         _trailRenderer = GetComponentInChildren<TrailRenderer>();
     }
 
@@ -131,12 +131,20 @@ public class AsteroidLogic : MonoBehaviour
     }
 
     private void OnTriggerEnter(Collider other)
-    {
+    {        
         if (other.gameObject.layer == Layers.Moon.Index)
         {
             var moon = other.gameObject.GetComponent<Moon>() ?? other.gameObject.GetComponentInParent<Moon>();
             moon.TakeDamage();
 
+            foreach (var chunk in _chunkList)
+            {
+                chunk.gameObject.layer = LayerMask.NameToLayer("Chunk");
+                chunk.transform.parent = GameManager.Instance.ChunksParent.transform;
+            }
+
+            //StartCoroutine(DestroyMeshColliders());
+            //StartCoroutine(DestroyChunksAndGameObject());
 
             _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
         }

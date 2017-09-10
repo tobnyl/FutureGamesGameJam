@@ -20,6 +20,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Moon")]
     public float MoonExplodeForce;
+    public bool IsMoonDestroyed;
 
     #endregion
     #region Events

@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
 public class Moon : MonoBehaviour 
 {
@@ -8,16 +10,20 @@ public class Moon : MonoBehaviour
     public int StartHealth = 100;
     public int DamageAtCollision = 10;
 
-    [SerializeField, ReadOnly]
+    [SerializeField]
     private int _currentHealth;
+
+    private FracturedObject _fracturedObject;
+    private List<FracturedChunk> _chunkList;
 
     #endregion
     #region Events
 
     void Awake()
 	{
-	    	
-	}
+        _fracturedObject = GetComponentInChildren<FracturedObject>();
+        _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();
+    }
 	
 	void Start() 
 	{
@@ -47,7 +53,14 @@ public class Moon : MonoBehaviour
 
         if (_currentHealth < 0)
         {
-            Destroy(gameObject);
+            foreach (var chunk in _chunkList)
+            {
+                chunk.gameObject.layer = LayerMask.NameToLayer("Chunk");
+                chunk.transform.parent = GameManager.Instance.ChunksParent.transform;
+            }
+
+            //GameManager.Instance.IsMoonDestroyed = true;
+            _fracturedObject.Explode(transform.position, GameManager.Instance.MoonExplodeForce);
         }
     }
 	
