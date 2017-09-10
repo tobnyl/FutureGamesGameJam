@@ -10,6 +10,7 @@ public class Moon : MonoBehaviour
 
 	public int StartHealth = 100;
 	public int DamageAtCollision = 10;
+    public GameObject Outline;
 
 	[SerializeField]
 	private int _currentHealth;
@@ -59,6 +60,8 @@ public class Moon : MonoBehaviour
 
 		if (_currentHealth < 0)
 		{
+            Outline.SetActive(false);
+
 			foreach (var chunk in _chunkList)
 			{
 				chunk.gameObject.layer = LayerMask.NameToLayer("Chunk");
