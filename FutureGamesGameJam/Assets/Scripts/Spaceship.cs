@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class Spaceship : MonoBehaviour 
 {
@@ -171,6 +172,9 @@ public class Spaceship : MonoBehaviour
             _playerHealth.TakeDamage(10);
             Destroy(Mesh);
             _rigidbody.isKinematic = true;
+
+            StartCoroutine(GameOver());
+
         }
         else if (!_isImmune && c.gameObject.layer == Layers.Asteroid.Index)
         {
@@ -195,6 +199,14 @@ public class Spaceship : MonoBehaviour
 
     #endregion
     #region Coroutines
+
+    IEnumerator GameOver()
+    {
+        PlayerPrefs.SetFloat("Time", GameObject.Find("GameManager").GetComponent<AsteroidSpawner>().ElapsedTime);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(2);
+
+    }
 
     private IEnumerator RecoilCoroutine()
     {
