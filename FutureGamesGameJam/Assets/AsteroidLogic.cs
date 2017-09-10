@@ -8,6 +8,7 @@ public class AsteroidLogic : MonoBehaviour
 
     [SerializeField]
     Transform asteroidTarget;
+    public GameObject RadarMesh;
 
     //This value is just visual to help setting up the object in the inspector
     [SerializeField]
@@ -73,7 +74,8 @@ public class AsteroidLogic : MonoBehaviour
             _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
             StartCoroutine(DestroyMeshColliders());
             StartCoroutine(DestroyChunksAndGameObject());
-            
+
+            Destroy(RadarMesh);
             Destroy(_trailRenderer);
         }
     }

@@ -807,11 +807,11 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 2
-  m_BackGroundColor: {r: 0, g: 0, b: 0, a: 0}
+  m_BackGroundColor: {r: 0.048172586, g: 0.11990311, b: 0.5955882, a: 0}
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0.8
-    y: 0
+    x: 0.78
+    y: 0.03
     width: 0.2
     height: 0.2
   near clip plane: 0.3
@@ -1335,10 +1335,10 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 4
+  m_Time: 200
   m_Parameters:
     serializedVersion: 2
-    widthMultiplier: 1
+    widthMultiplier: 4
     widthCurve:
       serializedVersion: 2
       m_Curve:
@@ -4084,6 +4084,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidTarget: {fileID: 1048797563}
+  RadarMesh: {fileID: 0}
   movementSpeed: 0.1
   movementSpeedDifRange: 0.015
   baseMass: 50
@@ -7035,6 +7036,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   asteroidTarget: {fileID: 1048797563}
+  RadarMesh: {fileID: 1471594772}
   movementSpeed: 0.1
   movementSpeedDifRange: 0.015
   baseMass: 50
@@ -7639,6 +7641,11 @@ Prefab:
       propertyPath: AsteroidPrefabs.Array.data[0]
       value: 
       objectReference: {fileID: 1117181814}
+    - target: {fileID: 114808287091569100, guid: 2b35014262ae176458fa09d0f387b561,
+        type: 2}
+      propertyPath: baseSpawnDistance
+      value: 300
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2b35014262ae176458fa09d0f387b561, type: 2}
   m_IsPrefabParent: 0
@@ -8385,7 +8392,22 @@ Prefab:
     - target: {fileID: 20046008866426358, guid: 5cf873c0f7b8aa644aab445e45f5509c,
         type: 2}
       propertyPath: m_ClearFlags
-      value: 1
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 20046008866426358, guid: 5cf873c0f7b8aa644aab445e45f5509c,
+        type: 2}
+      propertyPath: m_BackGroundColor.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20046008866426358, guid: 5cf873c0f7b8aa644aab445e45f5509c,
+        type: 2}
+      propertyPath: m_BackGroundColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 20046008866426358, guid: 5cf873c0f7b8aa644aab445e45f5509c,
+        type: 2}
+      propertyPath: m_BackGroundColor.b
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cf873c0f7b8aa644aab445e45f5509c, type: 2}
