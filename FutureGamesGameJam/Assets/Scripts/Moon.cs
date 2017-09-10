@@ -5,8 +5,11 @@ public class Moon : MonoBehaviour
 {
     #region Fields/Properties
 
-    // TODO: GameManager.Instance.MoonExplodeForce
+    public int StartHealth = 100;
+    public int DamageAtCollision = 10;
 
+    [SerializeField, ReadOnly]
+    private int _currentHealth;
 
     #endregion
     #region Events
@@ -18,25 +21,35 @@ public class Moon : MonoBehaviour
 	
 	void Start() 
 	{
-		
+        _currentHealth = StartHealth;
 	}
 
 	void Update() 
 	{		
 	}
 
-    private void OnTriggerEnter(Collider c)
-    {
-        if (c.gameObject.layer == Layers.Asteroid.Index)
-        {
-            Debug.Log("ASteroid hit moon");
-        }
-    }
+    //private void OnTriggerEnter(Collider c)
+    //{
+    //    if (c.gameObject.layer == Layers.Asteroid.Index)
+    //    {
+            
+            
+    //    }
+    //}
 	
 	#endregion
 	#region Methods
 	
-	
+	public void TakeDamage()
+    {
+        Debug.Log("ASteroid hit moon");
+        _currentHealth -= DamageAtCollision;
+
+        if (_currentHealth < 0)
+        {
+            Destroy(gameObject);
+        }
+    }
 	
 	#endregion
 }

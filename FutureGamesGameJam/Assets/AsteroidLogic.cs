@@ -132,30 +132,42 @@ public class AsteroidLogic : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Collided(other.tag);
-    }
-
-    public void Collided(string typeHit)
-    {
-        //collision code here        
-
-        if (typeHit == "Moon")
+        if (other.gameObject.layer == Layers.Moon.Index)
         {
-            //Play particle effect
-            //GameObject g = Instantiate(ParticleObject, asteroidModel.transform.position, Quaternion.identity) as GameObject;
-            //g.GetComponent<ParticleEffectObjScript>().SetScale(transform.localScale);
-            //asteroidModel.GetComponent<Collider>().enabled = false;
-            //asteroidModel.GetComponent<Renderer>().enabled = false;
+            var moon = other.gameObject.GetComponent<Moon>() ?? other.gameObject.GetComponentInParent<Moon>();
+            moon.TakeDamage();
 
-            //StartCoroutine("DestroySelf");
+
             _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
         }
-
-        else if (typeHit == "Player")
-        {
-
-        }
     }
+
+    //public void Collided(string typeHit)
+    //{
+    //    //collision code here        
+
+    //    if (typeHit == "Moon")
+    //    {
+    //        //Play particle effect
+    //        //GameObject g = Instantiate(ParticleObject, asteroidModel.transform.position, Quaternion.identity) as GameObject;
+    //        //g.GetComponent<ParticleEffectObjScript>().SetScale(transform.localScale);
+    //        //asteroidModel.GetComponent<Collider>().enabled = false;
+    //        //asteroidModel.GetComponent<Renderer>().enabled = false;
+
+    //        //StartCoroutine("DestroySelf");
+
+    //        var moon = GetComponent<Moon>() ?? GetComponentInParent<Moon>();
+    //        moon.TakeDamage();
+
+
+    //        _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
+    //    }
+
+    //    else if (typeHit == "Player")
+    //    {
+
+    //    }
+    //}
 
     IEnumerator DestroySelf()
     {
