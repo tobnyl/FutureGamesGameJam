@@ -139,7 +139,11 @@ public class AsteroidLogic : MonoBehaviour
         if (other.gameObject.layer == Layers.Moon.Index)
         {
             var moon = other.gameObject.GetComponent<Moon>() ?? other.gameObject.GetComponentInParent<Moon>();
-            moon.TakeDamage();
+
+            if (moon != null)
+            {
+                moon.TakeDamage();
+            }
 
             ExplodeAsteroid();
         }
