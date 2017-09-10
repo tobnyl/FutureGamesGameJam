@@ -14,7 +14,7 @@ public class Moon : MonoBehaviour
     private int _currentHealth;
 
     private FracturedObject _fracturedObject;
-    private List<FracturedChunk> _chunkList;
+    private List<Transform> _chunkList;
 
     #endregion
     #region Events
@@ -22,7 +22,7 @@ public class Moon : MonoBehaviour
     void Awake()
 	{
         _fracturedObject = GetComponentInChildren<FracturedObject>();
-        _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();
+        _chunkList = GetComponentsInChildren<Transform>().ToList();
     }
 	
 	void Start() 
