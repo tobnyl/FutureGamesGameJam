@@ -12,6 +12,9 @@ public class GameManager : MonoBehaviour
     [Header("Laser")]
     public float LaserMaxDistance;
 
+    [Header("Chunks")]
+    public GameObject ChunksParent;
+
     #endregion
     #region Events
 

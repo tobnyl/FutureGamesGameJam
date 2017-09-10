@@ -55,6 +55,7 @@ MonoBehaviour:
   MaxLaserChargeTime: 3
   ImmuneTime: 0.2
   LaserMaxDistance: 500
+  ChunksParent: {fileID: 0}
 --- !u!114 &114808287091569100
 MonoBehaviour:
   m_ObjectHideFlags: 1

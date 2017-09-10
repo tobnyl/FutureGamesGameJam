@@ -42,6 +42,7 @@ public class AsteroidLogic : MonoBehaviour
 
     private FracturedObject _fracturedObject;
     private List<FracturedChunk> _chunkList;
+    private TrailRenderer _trailRenderer;
 
     //This is the valeu thats used by the code to move the asteroid
     float moveSpeed;
@@ -51,6 +52,7 @@ public class AsteroidLogic : MonoBehaviour
     {
         _fracturedObject = GetComponentInChildren<FracturedObject>();
         _chunkList = GetComponentsInChildren<FracturedChunk>().ToList();
+        _trailRenderer = GetComponentInChildren<TrailRenderer>();
     }
 
     public void TakeDamage(float amount)
@@ -63,10 +65,12 @@ public class AsteroidLogic : MonoBehaviour
             foreach (var chunk in _chunkList)
             {
                 chunk.gameObject.layer = LayerMask.NameToLayer("Chunk");
+                chunk.transform.parent = GameManager.Instance.ChunksParent.transform;
             }
 
             _fracturedObject.Explode(transform.position, 100f);
             StartCoroutine(DestroyMeshColliders());
+            Destroy(_trailRenderer);
         }
     }
 
