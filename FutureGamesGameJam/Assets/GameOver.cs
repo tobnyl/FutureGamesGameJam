@@ -19,7 +19,14 @@ public class GameOver : MonoBehaviour
 			float _time = PlayerPrefs.GetFloat("Time");
 			span = TimeSpan.FromSeconds(_time);
 
-			timeText.text = ("You saved the moon for " + span.Minutes + " minutes and " + span.Seconds + " seconds!");
+			if (span.Minutes > 0)
+			{
+				timeText.text = ("You saved the moon for " + span.Minutes + " minutes and " + span.Seconds + " seconds!");
+			}
+			else
+			{
+				timeText.text = ("You saved the moon for " + span.Seconds + " seconds!");
+			}
 		}
 	}
 
@@ -31,11 +38,5 @@ public class GameOver : MonoBehaviour
 	public void QuitGame()
 	{
 		Application.Quit();
-	}
-
-	// Update is called once per frame
-	void Update()
-	{
-
 	}
 }
