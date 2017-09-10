@@ -56,9 +56,11 @@ MonoBehaviour:
   ImmuneTime: 0.2
   LaserMaxDistance: 500
   DestroyMeshCollidersTime: 1
-  DestroyChunksTime: 30
+  DestroyChunksTime: 20
   AsteroidExplodeForce: 200
   ChunksParent: {fileID: 0}
+  MoonExplodeForce: 50
+  IsMoonDestroyed: 0
 --- !u!114 &114808287091569100
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,5 +77,5 @@ MonoBehaviour:
     type: 2}
   AsteroidPrefabs:
   - {fileID: 0}
-  baseSpawnDistance: 150
+  baseSpawnDistance: 200
   elapsedSecPerWaveSec: 45
