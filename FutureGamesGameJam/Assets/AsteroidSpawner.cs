@@ -7,6 +7,7 @@ public class AsteroidSpawner : MonoBehaviour
 
 	[SerializeField] Transform moon;
 	[SerializeField] GameObject plainAsteroid;
+	[SerializeField] bool ezMode;
 
 	public GameObject[] AsteroidPrefabs;
 
@@ -100,9 +101,18 @@ public class AsteroidSpawner : MonoBehaviour
 			//GameObject g = (GameObject)Instantiate(plainAsteroid);
 			g.transform.position = new Vector3(0, 0, spawnDistance);
 
-			g.transform.RotateAround(moon.position, Vector3.up, Random.Range(0, 360));
-			g.transform.RotateAround(moon.position, Vector3.forward, Random.Range(0, 360));
-			g.transform.RotateAround(moon.position, Vector3.right, Random.Range(0, 360));
+			if (!ezMode)
+			{
+				g.transform.RotateAround(moon.position, Vector3.up, Random.Range(0, 360));
+				g.transform.RotateAround(moon.position, Vector3.forward, Random.Range(0, 360));
+				g.transform.RotateAround(moon.position, Vector3.right, Random.Range(0, 360));
+			}
+
+			else
+			{
+				g.transform.RotateAround(moon.position, Vector3.right, Random.Range(-30, 31));
+				g.transform.RotateAround(moon.position, Vector3.up, Random.Range(0, 360));
+			}
 
 			g.GetComponent<AsteroidLogic>().SetUpAsteroid(moon);
 		}
