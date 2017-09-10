@@ -54,7 +54,7 @@ public class AsteroidLogic : MonoBehaviour
     void Start()
     {
         _fracturedObject = GetComponentInChildren<FracturedObject>();
-        _chunkList = GetComponentsInChildren<Transform>().ToList();
+        _chunkList = GetComponentsInChildren<Transform>().Where(x => x.gameObject.layer != Layers.Radar.Index).ToList();
         _trailRenderer = GetComponentInChildren<TrailRenderer>();
     }
 
@@ -72,8 +72,8 @@ public class AsteroidLogic : MonoBehaviour
             }
 
             _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
-            StartCoroutine(DestroyMeshColliders());
-            StartCoroutine(DestroyChunksAndGameObject());
+            //StartCoroutine(DestroyMeshColliders());
+            //StartCoroutine(DestroyChunksAndGameObject());
 
             Destroy(RadarMesh);
             Destroy(_trailRenderer);
@@ -193,9 +193,12 @@ public class AsteroidLogic : MonoBehaviour
 
         foreach (var chunk in _chunkList)
         {
-            var test = chunk.gameObject.GetComponent<MeshCollider>();
+            var meshCollider = chunk.gameObject.GetComponent<MeshCollider>();
 
-            Destroy(chunk.gameObject.GetComponent<MeshCollider>());
+            if (meshCollider != null)
+            {
+                Destroy(meshCollider);
+            }
         }        
     }
 

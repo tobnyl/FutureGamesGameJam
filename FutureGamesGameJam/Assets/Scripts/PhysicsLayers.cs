@@ -11,6 +11,7 @@ public static class Layers
     public static readonly PhysicsLayer Moon = new PhysicsLayer("Moon");
     public static readonly PhysicsLayer Asteroid = new PhysicsLayer("Asteroid");
     public static readonly PhysicsLayer Chunk = new PhysicsLayer("Chunk");
+    public static readonly PhysicsLayer Radar = new PhysicsLayer("Radar");
 }
 
 public struct PhysicsLayer
