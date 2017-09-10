@@ -18,6 +18,9 @@ public class GameManager : MonoBehaviour
     public float AsteroidExplodeForce;
     public GameObject ChunksParent;
 
+    [Header("Moon")]
+    public float MoonExplodeForce;
+
     #endregion
     #region Events
 
