@@ -78,7 +78,7 @@ public class AsteroidLogic : MonoBehaviour
 
         _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
         //StartCoroutine(DestroyMeshColliders());
-        //StartCoroutine(DestroyChunksAndGameObject());
+        StartCoroutine(DestroyChunksAndGameObject());
 
         Destroy(RadarMesh);
         Destroy(_trailRenderer);
