@@ -22,6 +22,8 @@ public class AsteroidLogic : MonoBehaviour
     float deathTime;
 
     float mass;
+
+    [SerializeField, ReadOnly]
     float health;
 
     [SerializeField]
