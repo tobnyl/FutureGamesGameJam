@@ -22,7 +22,7 @@ public class Moon : MonoBehaviour
     void Awake()
 	{
         _fracturedObject = GetComponentInChildren<FracturedObject>();
-        _chunkList = GetComponentsInChildren<Transform>().ToList();
+        _chunkList = GetComponentsInChildren<Transform>().Where(x => x.gameObject.layer != Layers.Radar.Index).ToList();
     }
 	
 	void Start() 
