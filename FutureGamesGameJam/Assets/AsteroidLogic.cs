@@ -64,20 +64,24 @@ public class AsteroidLogic : MonoBehaviour
 
         if (health <= 0)
         {
-            //Destroy(gameObject);
-            foreach (var chunk in _chunkList)
-            {
-                chunk.gameObject.layer = LayerMask.NameToLayer("Chunk");
-                chunk.transform.parent = GameManager.Instance.ChunksParent.transform;
-            }
-
-            _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
-            //StartCoroutine(DestroyMeshColliders());
-            //StartCoroutine(DestroyChunksAndGameObject());
-
-            Destroy(RadarMesh);
-            Destroy(_trailRenderer);
+            ExplodeAsteroid();
         }
+    }
+
+    private void ExplodeAsteroid()
+    {
+        foreach (var chunk in _chunkList)
+        {
+            chunk.gameObject.layer = LayerMask.NameToLayer("Chunk");
+            chunk.transform.parent = GameManager.Instance.ChunksParent.transform;
+        }
+
+        _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
+        //StartCoroutine(DestroyMeshColliders());
+        //StartCoroutine(DestroyChunksAndGameObject());
+
+        Destroy(RadarMesh);
+        Destroy(_trailRenderer);
     }
 
     public void SetUpAsteroid(Transform moon)
@@ -137,16 +141,7 @@ public class AsteroidLogic : MonoBehaviour
             var moon = other.gameObject.GetComponent<Moon>() ?? other.gameObject.GetComponentInParent<Moon>();
             moon.TakeDamage();
 
-            foreach (var chunk in _chunkList)
-            {
-                chunk.gameObject.layer = LayerMask.NameToLayer("Chunk");
-                chunk.transform.parent = GameManager.Instance.ChunksParent.transform;
-            }
-
-            //StartCoroutine(DestroyMeshColliders());
-            //StartCoroutine(DestroyChunksAndGameObject());
-
-            _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
+            ExplodeAsteroid();
         }
     }
 
