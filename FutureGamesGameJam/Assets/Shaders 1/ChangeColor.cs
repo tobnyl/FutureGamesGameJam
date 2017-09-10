@@ -17,21 +17,25 @@ public class ChangeColor : MonoBehaviour {
 		Rend.sharedMaterial = materials[0];
 		}
 
-	void OnMouseDown()
+	public void SetColor(float percentage)
 	{
+        Debug.Log(percentage);
+        var materialToUse = Mathf.FloorToInt(Mathf.Lerp(materials.Length - 1, 0, percentage));
 
 		if (materials.Length == 0)
 			return;
 
-		if (Input.GetMouseButtonDown (0)) {
-			index += 1;
+        Rend.sharedMaterial = materials[materialToUse];
 
-			if (index == materials.Length + 1)
-				index = 1;
+        //if (Input.GetMouseButtonDown (0)) {
+        //	index += 1;
 
-			print (index);
+        //	if (index == materials.Length + 1)
+        //		index = 1;
 
-			Rend.sharedMaterial = materials [index - 1];
-		}
-	}
+        //	print (index);
+
+        //	Rend.sharedMaterial = materials [index - 1];
+        //}
+    }
 }

@@ -17,6 +17,8 @@ public class Moon : MonoBehaviour
 	private FracturedObject _fracturedObject;
 	private List<FracturedChunk> _chunkList;
 
+    private ChangeColor _changeColor;
+
 	#endregion
 	#region Events
 
@@ -24,6 +26,7 @@ public class Moon : MonoBehaviour
 	{
 		_fracturedObject = GetComponentInChildren<FracturedObject>();
 		_chunkList = GetComponentsInChildren<FracturedChunk>().ToList();
+        _changeColor = GetComponent<ChangeColor>();
 	}
 
 	void Start()
@@ -51,6 +54,8 @@ public class Moon : MonoBehaviour
 	{
 		Debug.Log("ASteroid hit moon");
 		_currentHealth -= DamageAtCollision;
+
+        _changeColor.SetColor((float)_currentHealth / StartHealth);
 
 		if (_currentHealth < 0)
 		{
