@@ -193,6 +193,8 @@ public class AsteroidLogic : MonoBehaviour
 
         foreach (var chunk in _chunkList)
         {
+            var test = chunk.gameObject.GetComponent<MeshCollider>();
+
             Destroy(chunk.gameObject.GetComponent<MeshCollider>());
         }        
     }
