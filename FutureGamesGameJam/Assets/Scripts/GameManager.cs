@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     [Header("Asteroids")]
     public float DestroyMeshCollidersTime;
     public float DestroyChunksTime;
+    public float AsteroidExplodeForce;
     public GameObject ChunksParent;
 
     #endregion

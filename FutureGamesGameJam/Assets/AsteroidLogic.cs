@@ -70,7 +70,7 @@ public class AsteroidLogic : MonoBehaviour
                 chunk.transform.parent = GameManager.Instance.ChunksParent.transform;
             }
 
-            _fracturedObject.Explode(transform.position, 100f);
+            _fracturedObject.Explode(transform.position, GameManager.Instance.AsteroidExplodeForce);
             StartCoroutine(DestroyMeshColliders());
             StartCoroutine(DestroyChunksAndGameObject());
             

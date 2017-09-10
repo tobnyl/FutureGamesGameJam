@@ -57,6 +57,7 @@ MonoBehaviour:
   LaserMaxDistance: 500
   DestroyMeshCollidersTime: 1
   DestroyChunksTime: 30
+  AsteroidExplodeForce: 200
   ChunksParent: {fileID: 0}
 --- !u!114 &114808287091569100
 MonoBehaviour:
