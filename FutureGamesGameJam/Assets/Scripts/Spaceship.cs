@@ -9,6 +9,8 @@ public class Spaceship : MonoBehaviour
     public Transform FireSpawnPoint;
     public GameObject LaserPrefab;
     public GameObject Mesh;
+    public GameObject RadarMesh;
+    public GameObject RadarCamera; 
 
     [Header("Force")]
     public float BoostMultiplier = 1;    
@@ -122,6 +124,8 @@ public class Spaceship : MonoBehaviour
             //Debug.Log("Is Fired false");
             _isFired = false;
         }
+
+        RadarMesh.transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
     }
 
     void FixedUpdate()

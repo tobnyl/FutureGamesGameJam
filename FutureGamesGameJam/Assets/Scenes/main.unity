@@ -8409,6 +8409,16 @@ Prefab:
       propertyPath: m_BackGroundColor.b
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114847145792571974, guid: 5cf873c0f7b8aa644aab445e45f5509c,
+        type: 2}
+      propertyPath: RadarMesh
+      value: 
+      objectReference: {fileID: 454171712}
+    - target: {fileID: 114847145792571974, guid: 5cf873c0f7b8aa644aab445e45f5509c,
+        type: 2}
+      propertyPath: RadarCamera
+      value: 
+      objectReference: {fileID: 197211212}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5cf873c0f7b8aa644aab445e45f5509c, type: 2}
   m_IsPrefabParent: 0
