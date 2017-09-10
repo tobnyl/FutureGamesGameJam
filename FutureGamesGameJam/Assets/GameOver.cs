@@ -14,11 +14,13 @@ public class GameOver : MonoBehaviour
 	// Use this for initialization
 	void Start()
 	{
-		float _time = PlayerPrefs.GetFloat("Time");
-		span = TimeSpan.FromSeconds(_time);
+		if (timeText)
+		{
+			float _time = PlayerPrefs.GetFloat("Time");
+			span = TimeSpan.FromSeconds(_time);
 
-		timeText.text = ("You saved the moon for " + span.Minutes + " minutes and " + span.Seconds + " seconds!");
-
+			timeText.text = ("You saved the moon for " + span.Minutes + " minutes and " + span.Seconds + " seconds!");
+		}
 	}
 
 	public void PlayAgain()
